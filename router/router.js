@@ -1,5 +1,10 @@
-import express, { application } from "express";
-import companyRouter, { customersRouter, priceRouter, product, productRouter, subscribeRouter } from "../src/router.js"
+import express from "express";
+import {companyRouter} from "../src/company/router.js"
+import {customerRouter} from "../src/customers/router.js"
+import {priceRouter} from "../src/prices/router.js"
+import {productRouter} from "../src/product/router.js"
+import {subscribeRouter} from "../src/subscribe/router.js"
+
 
 export const atripeRouter = express.Router();
 
@@ -7,17 +12,11 @@ export const atripeRouter = express.Router();
 
 // company
 atripeRouter.use('/company', companyRouter);
-
-
 // customer
-atripeRouter.use('/customer', customersRouter);
-
+atripeRouter.use('/customer', customerRouter);
 // prices
 atripeRouter.use('/price', priceRouter);
 // product
 atripeRouter.use('/product', productRouter);
 // subscribe
 atripeRouter.use('/subscribe', subscribeRouter);
-// 회원가입
-// 로그인
-// 
