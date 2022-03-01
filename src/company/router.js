@@ -1,10 +1,14 @@
 import express from "express";
-import {createCompany,loginCompany} from "./controller.js";
+import * as company from "./controller.js";
+import {checkAPIKey} from "../../middleware/middleware.js";
 
 export const companyRouter = express.Router();
 
 //회원가입
-companyRouter.post('/create', createCompany);
+companyRouter.post('/create', company.createCompany);
+companyRouter.get('/retrieve', checkAPIKey ,company.getCompany);
+companyRouter.post('/delete', checkAPIKey ,company.deleteCompany);
 
-//로그인
-companyRouter.get('/login', loginCompany);
+
+
+// TODO : password encryption

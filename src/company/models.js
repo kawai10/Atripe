@@ -1,5 +1,6 @@
 import SQ from "sequelize"
 import {sequelize} from "../../connection/dbConnection.js"
+import {Customer} from "../customers/models.js"
 const DataTypes = SQ.DataTypes;
 
 // 테이블 정의
@@ -14,6 +15,9 @@ const Company = sequelize.define('company', {
         type: DataTypes.STRING(50),
         unique: true,
         allowNull : false,
+        validate :{
+            isEmail : true
+        }
     },
     password : {
         type: DataTypes.STRING(50),
@@ -27,25 +31,53 @@ const Company = sequelize.define('company', {
     name : {
         type : DataTypes.STRING(20),
         allowNull : false
+    },
+    createdAt : {
+        type : DataTypes.DATEONLY
+    },
+    updatedAt : {
+        type : DataTypes.DATEONLY
     }
 })
+Company.hasMany(Customer, {as : "customer"})
 
 async function createCompanyObject(id, email, password, key, name){
-    return Company.create({
+    // TODO : change variable name
+    const data = await Company.create({
         id,
         email,
         password,
         key,
-        name,
-    }).then(data => this.getCompanyObjectById(data.id))
+        name
+    });
+    return getCompanyObject(email, password);
 }
 
-async function getCompanyObjectById(id){
+function getCompanyObject(email, password){
     return Company.findOne({
+        attributes : { exclude : ['password']},
         where : {
-            id
+            email,
+            password
         }
     })
 }
 
-export {createCompanyObject, getCompanyObjectById}
+function deleteCompanyObject(email, password){
+    return Company.destroy({
+        where : {
+            email,
+            password
+        }
+    })
+}
+
+function validateApiKey(key){
+    return Company.findOne({
+        where : {
+            key
+        }
+    })
+}
+
+export {createCompanyObject, getCompanyObject, validateApiKey, deleteCompanyObject}

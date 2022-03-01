@@ -1,5 +1,5 @@
 import SQ from "sequelize"
-import {sequelize} from "/Users/cloudike/Desktop/node/Atripe/connection/dbConnection.js"
+import {sequelize} from "../../connection/dbConnection.js"
 const DataTypes = SQ.DataTypes;
 
 const Customer = sequelize.define('customer', {
@@ -8,20 +8,50 @@ const Customer = sequelize.define('customer', {
         primaryKey : true,
         allowNull : false,
     },
-    company_id : {
-        type : DataTypes.INTEGER,
-        references : {
-            model : 'companys',
-            key : 'id'
-        }
-    },
     email : {
         type : DataTypes.STRING(50),
         unique : true,
         allowNull : false,
+        validate : {
+            isEmail : true
+        }
     },
     name : {
         type : DataTypes.STRING(20),
         allowNull : false,
+    },
+    createdAt : {
+        type : DataTypes.DATEONLY
+    },
+    updatedAt : {
+        type : DataTypes.DATEONLY
     }
 })
+
+async function createCustomerObject(id, email, name, companyId){
+    // TODO : change variable name
+    const data = await Customer.create({
+        id,
+        email,
+        name,
+        companyId
+    });
+    return getCustomerObject(id)
+}
+
+function getAllCustomerObjects(){
+    return Customer.findAll({
+        order : [['createdAt', 'DESC']]
+    })
+}
+
+function getCustomerObject(id){
+    return Customer.findOne({
+        where : {
+            id
+        }
+    })
+}
+
+
+export {Customer, createCustomerObject, getAllCustomerObjects, getCustomerObject}
