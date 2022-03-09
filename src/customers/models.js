@@ -29,8 +29,7 @@ const Customer = sequelize.define("customer", {
 });
 
 async function createCustomerObject(id, email, name, companyId) {
-  // TODO : change variable name
-  const data = await Customer.create({
+  await Customer.create({
     id,
     email,
     name,

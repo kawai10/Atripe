@@ -43,7 +43,7 @@ Company.hasMany(Customer, { as: "customer" });
 
 async function createCompanyObject(id, email, password, key, name) {
   // TODO : change variable name
-  const data = await Company.create({
+  await Company.create({
     id,
     email,
     password,
