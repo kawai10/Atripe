@@ -25,6 +25,12 @@ async function getCustomerbyId(req, res) {
   res.status(200).json(customerObject);
 }
 
+async function updateCustomer(req, res) {
+  const { id, email, name } = req.body;
+  const updatedObject = await customer.updateCustomerObject(id, email, name);
+  res.status(200).json(updatedObject);
+}
+
 async function deleteCustomer(req, res) {
   const id = req.params.id;
   if (id) {
@@ -36,4 +42,10 @@ async function deleteCustomer(req, res) {
   }
 }
 
-export { createCustomer, getAllCustomers, getCustomerbyId, deleteCustomer };
+export {
+  createCustomer,
+  getAllCustomers,
+  getCustomerbyId,
+  deleteCustomer,
+  updateCustomer,
+};

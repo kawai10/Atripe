@@ -56,8 +56,8 @@ function getCustomerObject(id) {
 async function updateCustomerObject(id, email, name) {
   await Customer.update(
     {
-      email,
-      name,
+      email: email,
+      name: name,
     },
     {
       where: {
@@ -77,7 +77,9 @@ function deleteOneCustomerObject(id) {
 }
 
 function deleteAllCustomerObject() {
-  Customer.destroy();
+  return Customer.destroy({
+    truncate: true,
+  });
 }
 
 export {

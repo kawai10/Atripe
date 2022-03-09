@@ -14,8 +14,8 @@ customerRouter.get("/retrieve", checkAPIKey, customer.getAllCustomers);
 customerRouter.get("/retrieve/:id", checkAPIKey, customer.getCustomerbyId);
 
 //고객 수정
-// customerRouter.put('/update/:id', updateCustomer);
-// TODO : update, delete 쿼리 수정하기
+customerRouter.put("/update", checkAPIKey, customer.updateCustomer);
+
 //모든 고객 삭제
 customerRouter.delete("/delete", checkAPIKey, customer.deleteCustomer);
 
