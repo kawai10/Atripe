@@ -14,8 +14,13 @@ async function createCompany(req, res) {
   res.status(201).json(companyObject);
 }
 
+async function getAllCompany(req, res) {
+  const companiesObject = await company.getAllCompanyObject();
+  res.status(200).json(companiesObject);
+}
+
 async function getCompany(req, res) {
-  const { email, password } = req.query;
+  const { email, password } = req.body;
   const companyObject = await company.getCompanyObject(email, password);
   res.status(200).json(companyObject);
 }
@@ -36,4 +41,4 @@ function createApikeys() {
   return APIKeys;
 }
 
-export { createCompany, getCompany, deleteCompany };
+export { createCompany, getCompany, deleteCompany, getAllCompany };

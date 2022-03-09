@@ -68,7 +68,7 @@ async function updateCustomerObject(id, email, name) {
 }
 
 function deleteOneCustomerObject(id) {
-  return Customer.destroy({
+  Customer.destroy({
     where: {
       id,
     },
@@ -76,7 +76,7 @@ function deleteOneCustomerObject(id) {
 }
 
 function deleteAllCustomerObject() {
-  return Customer.destroy({
+  Customer.destroy({
     truncate: true,
   });
 }

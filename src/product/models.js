@@ -23,6 +23,13 @@ const Product = sequelize.define("product", {
     type: DataTypes.DATEONLY,
   },
 });
+function getAllProductObject(companyId) {
+  return Product.findAll({
+    where: {
+      companyId,
+    },
+  });
+}
 
 function getProductObject(id) {
   return Product.findOne({
@@ -32,15 +39,16 @@ function getProductObject(id) {
   });
 }
 
-async function createProductObject(id, name) {
+async function createProductObject(id, name, companyId) {
   await Product.create({
     id,
     name,
+    companyId,
   });
   return getProductObject(id);
 }
 
-function updateProductObject(id, active, name) {
+async function updateProductObject(id, name, active) {
   await Product.update(
     {
       active: active,
@@ -68,3 +76,13 @@ function deleteAllProductObjet() {
     truncate: true,
   });
 }
+
+export {
+  Product,
+  getProductObject,
+  getAllProductObject,
+  createProductObject,
+  updateProductObject,
+  deleteAllProductObjet,
+  deleteOneProductObject,
+};

@@ -31,13 +31,13 @@ async function updateCustomer(req, res) {
   res.status(200).json(updatedObject);
 }
 
-async function deleteCustomer(req, res) {
+function deleteCustomer(req, res) {
   const id = req.params.id;
   if (id) {
-    await customer.deleteOneCustomerObject(id);
+    customer.deleteOneCustomerObject(id);
     res.status(200).json({ message: `The ${id} remove successd` });
   } else {
-    await customer.deleteAllCustomerObject();
+    customer.deleteAllCustomerObject();
     res.status(200).json({ message: "All Customer are removed" });
   }
 }

@@ -1,6 +1,7 @@
 import SQ from "sequelize";
 import { sequelize } from "../../connection/dbConnection.js";
 import { Customer } from "../customers/models.js";
+import { Product } from "../product/models.js";
 const DataTypes = SQ.DataTypes;
 
 // 테이블 정의
@@ -40,6 +41,7 @@ const Company = sequelize.define("company", {
   },
 });
 Company.hasMany(Customer, { as: "customer" });
+Company.hasMany(Product, { as: "product" });
 
 async function createCompanyObject(id, email, password, key, name) {
   // TODO : change variable name
@@ -63,6 +65,10 @@ function getCompanyObject(email, password) {
   });
 }
 
+function getAllCompanyObject() {
+  return Company.findAll();
+}
+
 function deleteCompanyObject(email, password) {
   return Company.destroy({
     where: {
@@ -80,9 +86,24 @@ function validateApiKey(key) {
   });
 }
 
+function getCompanyIdFromApikey(key) {
+  return Company.findOne(
+    {
+      attributes: ["id"],
+    },
+    {
+      where: {
+        key,
+      },
+    }
+  );
+}
+
 export {
   createCompanyObject,
   getCompanyObject,
   validateApiKey,
   deleteCompanyObject,
+  getCompanyIdFromApikey,
+  getAllCompanyObject,
 };
