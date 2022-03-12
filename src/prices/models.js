@@ -77,4 +77,23 @@ function getPriceObjectByProductId(productId) {
   });
 }
 
-export { Price, createPriceObject, getPriceObject, getPriceObjectByProductId };
+function deleteOneObject(price_id) {
+  Price.destroy({
+    where: { price_id },
+  });
+}
+
+function deleteAllObject(productId) {
+  Price.destroy({
+    where: { productId },
+  });
+}
+
+export {
+  Price,
+  createPriceObject,
+  getPriceObject,
+  getPriceObjectByProductId,
+  deleteAllObject,
+  deleteOneObject,
+};

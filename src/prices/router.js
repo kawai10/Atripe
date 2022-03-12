@@ -9,7 +9,6 @@ priceRouter.post("/create", checkAPIKey, price.createPrice);
 priceRouter.get("/retrieves", checkAPIKey, price.retrieveAllPrice);
 //조회
 priceRouter.get("/retrieve", checkAPIKey, price.retrievePrice);
-// //수정
-// priceRouter.put('/update/:id', updatePrice);
-// //삭제
-// priceRouter.delete('delete/:id', deletePrice);
+
+// 삭제
+priceRouter.delete("/delete", checkAPIKey, price.deletePrice);
