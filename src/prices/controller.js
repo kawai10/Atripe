@@ -32,7 +32,6 @@ function deletePrice(req, res) {
   const id = Object.keys(req.body).toString();
   if (id == "price_id") {
     const price_id = req.body.price_id;
-    console.log(price_id);
     price.deleteOneObject(price_id);
     res.status(200).json({ message: `The ${price_id} removed success` });
   } else {
