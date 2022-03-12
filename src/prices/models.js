@@ -25,6 +25,7 @@ const Price = sequelize.define("price", {
   interval_account: {
     type: DataTypes.INTEGER,
     allowNull: true,
+    defaultValue: 0,
   },
   type: {
     type: DataTypes.STRING(20),
@@ -62,11 +63,18 @@ async function createPriceObject(
 
 function getPriceObject(id) {
   return Price.findOne({
-    attributes: { exclude: ["type", "interval_account"] },
     where: {
       price_id: id,
     },
   });
 }
 
-export { Price, createPriceObject, getPriceObject };
+function getPriceObjectByProductId(productId) {
+  return Price.findAll({
+    where: {
+      productId,
+    },
+  });
+}
+
+export { Price, createPriceObject, getPriceObject, getPriceObjectByProductId };

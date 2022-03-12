@@ -5,10 +5,10 @@ export const priceRouter = express.Router();
 
 //생성
 priceRouter.post("/create", checkAPIKey, price.createPrice);
-// //모두 조회
-// priceRouter.get('/prices', getAllPrices);
-// //조회
-// priceRouter.get('/price/:id', getPrice);
+// product 의 모든 price 조회
+priceRouter.get("/retrieves", checkAPIKey, price.retrieveAllPrice);
+//조회
+priceRouter.get("/retrieve", checkAPIKey, price.retrievePrice);
 // //수정
 // priceRouter.put('/update/:id', updatePrice);
 // //삭제
