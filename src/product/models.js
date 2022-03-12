@@ -1,5 +1,6 @@
 import SQ from "sequelize";
 import { sequelize } from "../../connection/dbConnection.js";
+import { Price } from "../prices/models.js";
 const DataTypes = SQ.DataTypes;
 
 const Product = sequelize.define("product", {
@@ -23,6 +24,9 @@ const Product = sequelize.define("product", {
     type: DataTypes.DATEONLY,
   },
 });
+
+Product.hasMany(Price, { as: "price" });
+
 function getAllProductObject(companyId) {
   return Product.findAll({
     where: {
