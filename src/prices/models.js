@@ -1,7 +1,7 @@
 "use strict";
 import SQ from "sequelize";
 import { sequelize } from "../../connection/dbConnection.js";
-import { Product } from "../product/models.js";
+import { Subscription } from "../subscribe/models.js";
 const DataTypes = SQ.DataTypes;
 
 const Price = sequelize.define("price", {
@@ -43,6 +43,8 @@ const Price = sequelize.define("price", {
     type: DataTypes.DATEONLY,
   },
 });
+
+Price.hasMany(Subscription, { as: "subsription" });
 
 async function createPriceObject(
   price_id,

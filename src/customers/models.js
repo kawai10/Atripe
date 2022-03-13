@@ -1,5 +1,6 @@
-import SQ, { where } from "sequelize";
+import SQ from "sequelize";
 import { sequelize } from "../../connection/dbConnection.js";
+import { Subscription } from "../subscribe/models.js";
 const DataTypes = SQ.DataTypes;
 
 const Customer = sequelize.define("customer", {
@@ -27,6 +28,8 @@ const Customer = sequelize.define("customer", {
     type: DataTypes.DATEONLY,
   },
 });
+
+Customer.hasMany(Subscription, { as: "subscription" });
 
 async function createCustomerObject(id, email, name, companyId) {
   await Customer.create({
