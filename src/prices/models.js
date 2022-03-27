@@ -44,7 +44,7 @@ const Price = sequelize.define("price", {
   },
 });
 
-Price.hasMany(Subscription, { as: "subsription" });
+Price.hasMany(Subscription);
 
 async function createPriceObject(
   price_id,

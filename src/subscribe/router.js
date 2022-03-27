@@ -1,9 +1,9 @@
 import express from "express";
+import * as subscription from "./controller.js";
+export const subscribeRouter = express.Router();
 
-export const subscribeRouter = express.Router()
-
-// //생성
-// subscribeRouter.post('create', createSubscribe);
+//생성
+subscribeRouter.post("/create", subscription.createSubscriptionObject);
 // //모두 조회
 // subscribeRouter.get('/subscribes', getAllSubscribes);
 // //조회
