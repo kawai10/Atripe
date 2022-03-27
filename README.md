@@ -1,2 +1,2 @@
 # Atripe
- clone Stripe
+** 망한 프로젝트. 설계가 잘못됨**
